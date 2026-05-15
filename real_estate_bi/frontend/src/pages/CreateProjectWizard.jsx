@@ -42,17 +42,16 @@ export default function CreateProjectWizard() {
     <div className="max-w-5xl mx-auto animate-slide-up">
       <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
 
-        {/* Индикатор прогресса */}
         <div className="bg-slate-50 px-8 py-5 border-b border-slate-100 flex justify-between items-center">
           {[1, 2, 3, 4].map(num => (
-            <div key={num} className="flex items-center">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
+            <div key={num} className="flex items-center w-full">
+              <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
                 step >= num ? 'bg-sky-500 text-white shadow-md shadow-sky-200' : 'bg-slate-200 text-slate-500'
               }`}>
                 {num}
               </div>
               {num < 4 && (
-                <div className={`w-24 h-1 mx-2 rounded transition-colors duration-300 ${
+                <div className={`w-full h-1 mx-4 rounded transition-colors duration-300 ${
                   step > num ? 'bg-sky-500' : 'bg-slate-200'
                 }`} />
               )}
@@ -60,9 +59,8 @@ export default function CreateProjectWizard() {
           ))}
         </div>
 
-        {/* Контент шага */}
-        <div className="p-8 min-h-[400px] relative">
-          <div key={step} className="animate-fade-in absolute inset-0 p-8">
+        <div className="p-8 min-h-[450px]">
+          <div className="animate-fade-in">
             {step === 1 && <StepOne data={projectData} update={updateData} />}
             {step === 2 && <StepTwo data={projectData} update={updateData} />}
             {step === 3 && <StepThree data={projectData} update={updateData} />}
@@ -70,7 +68,6 @@ export default function CreateProjectWizard() {
           </div>
         </div>
 
-        {/* Навигация */}
         <div className="px-8 py-5 border-t border-slate-100 flex justify-between bg-slate-50">
           <button
             onClick={handlePrev}
@@ -93,7 +90,7 @@ export default function CreateProjectWizard() {
               disabled={isLoading}
               className="px-6 py-2.5 rounded-lg font-medium text-white bg-emerald-500 hover:bg-emerald-600 shadow-sm shadow-emerald-200 hover:shadow-md disabled:opacity-70 transition-all duration-200"
             >
-              {isLoading ? 'Генерация...' : 'Завершить и построить модель'}
+              {isLoading ? 'Генерация...' : 'Завершить'}
             </button>
           )}
         </div>

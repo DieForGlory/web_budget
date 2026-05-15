@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: bi_database
     ports:
-      - "5438:5438"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

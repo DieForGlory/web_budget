@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { financeApi } from '../api/client';
 import {
-  ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend
+  ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip
 } from 'recharts';
 
 export default function Dashboard() {
@@ -51,7 +51,7 @@ export default function Dashboard() {
               />
               <Tooltip
                 contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
-                formatter={(value) => new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'USD' }).format(value)}
+                formatter={(value) => new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value)}
               />
               <Area
                 type="monotone"

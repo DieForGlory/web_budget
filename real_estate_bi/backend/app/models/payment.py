@@ -16,7 +16,7 @@ class TEPPaymentConfig(Base):
     id = Column(Integer, primary_key=True, index=True)
     tep_id = Column(Integer, ForeignKey("project_teps.id", ondelete="CASCADE"))
 
-    payment_type = Column(Enum(PaymentType), nullable=False)
+    payment_type = Column(Enum(PaymentType, native_enum=False), nullable=False)
     share_percent = Column(Float, nullable=False)
     installment_months = Column(Integer, default=0)
     down_payment_percent = Column(Float, default=100.0)
