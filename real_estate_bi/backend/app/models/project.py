@@ -11,7 +11,7 @@ class PropertyCategory(enum.Enum):
     PARKING = "parking"
 
 
-class ProjectClass(enum.Enum):
+class ProjectClass(str, enum.Enum):
     COMFORT = "Комфорт"
     BUSINESS = "Бизнес"
     ELITE = "Элит"
@@ -29,7 +29,10 @@ class Project(Base):
     apts_per_floor = Column(Integer, nullable=True)
     commercial_area_sqm = Column(Float, nullable=False)
     construction_duration_months = Column(Integer, nullable=False)
-    project_class = Column(Enum(ProjectClass, native_enum=False), nullable=False)
+    project_class = Column(
+        Enum(ProjectClass, native_enum=False, values_callable=lambda obj: [item.value for item in obj]),
+        nullable=False
+    )
     address = Column(String, nullable=False)
 
     # Шаг 3: Финансовые и сбытовые параметры
@@ -50,7 +53,10 @@ class ProjectTEP(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     project_id = Column(Integer, ForeignKey("projects.id"))
-    category = Column(Enum(PropertyCategory, native_enum=False), nullable=False)
+    category = Column(
+        Enum(PropertyCategory, native_enum=False, values_callable=lambda obj: [item.value for item in obj]),
+        nullable=False
+    )
 
     units_count = Column(Integer, nullable=False)
     avg_price_sqm_usd = Column(Integer, nullable=False)

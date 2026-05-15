@@ -50,7 +50,7 @@ class PaymentConfigResponse(PaymentConfigBase):
     tep_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class TEPBase(BaseModel):
     category: str
@@ -78,4 +78,4 @@ class ProjectResponse(ProjectBase):
     teps: List[TEPResponse]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
