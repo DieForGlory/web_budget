@@ -58,17 +58,3 @@ class ProjectTEP(Base):
 
     project = relationship("Project", back_populates="teps")
     payment_configs = relationship("TEPPaymentConfig", back_populates="tep", cascade="all, delete-orphan")
-
-class ProjectTEP(Base):
-    # Шаг 2: Типы недвижимости
-    __tablename__ = "project_teps"
-
-    id = Column(Integer, primary_key=True, index=True)
-    project_id = Column(Integer, ForeignKey("projects.id"))
-    category = Column(Enum(PropertyCategory), nullable=False)
-
-    units_count = Column(Integer, nullable=False)
-    avg_price_sqm_usd = Column(Integer, nullable=False)  # Единый числовой формат integer
-    avg_area_sqm = Column(Float, nullable=False)
-
-    project = relationship("Project", back_populates="teps")
