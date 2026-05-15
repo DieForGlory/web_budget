@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine
-from app.models import base
+from app.models.base import Base
 from app.routers import projects, finance
 
-base.Base.metadata.create_all(bind=engine)
+# Автоматическое создание таблиц при запуске
+Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Real Estate BI Application")
+app = FastAPI(title="Real Estate BI API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,3 +19,7 @@ app.add_middleware(
 
 app.include_router(projects.router, prefix="/api/v1/projects", tags=["Projects"])
 app.include_router(finance.router, prefix="/api/v1/finance", tags=["Finance"])
+
+@app.get("/")
+def root():
+    return {"status": "Real Estate BI Backend is running"}

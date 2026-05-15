@@ -1,8 +1,24 @@
 import enum
-from sqlalchemy import Column, Integer, String, Float, Boolean, Enum
+from sqlalchemy import Column, Integer, Float, ForeignKey, Enum
+from sqlalchemy.orm import relationship
 from app.models.base import Base
+
 
 class PaymentType(enum.Enum):
     FULL = "100_percent"
     MORTGAGE = "mortgage"
     INSTALLMENT = "installment"
+
+
+class TEPPaymentConfig(Base):
+    __tablename__ = "tep_payment_configs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    tep_id = Column(Integer, ForeignKey("project_teps.id", ondelete="CASCADE"))
+
+    payment_type = Column(Enum(PaymentType), nullable=False)
+    share_percent = Column(Float, nullable=False)
+    installment_months = Column(Integer, default=0)
+    down_payment_percent = Column(Float, default=100.0)
+
+    tep = relationship("ProjectTEP", back_populates="payment_configs")
